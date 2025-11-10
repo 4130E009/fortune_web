@@ -5,11 +5,11 @@ import datetime
 # 🌐 頁面設定
 st.set_page_config(page_title="每日一句", page_icon="🔮", layout="centered")
 
-# 🧙‍♀️ 標題區
+# 🧙‍♀️ 頁首設計
 st.markdown(
     """
     <h1 style='text-align:center; color:#fcd34d;'>🔮 每日一句 🔮</h1>
-    <p style='text-align:center; color:#e9d5ff;'>輸入名字與生日，讓宇宙給你今天的名言。</p>
+    <p style='text-align:center; color:#e9d5ff;'>輸入名字與生日，讓宇宙告訴你今日的命運與靈光。</p>
     """,
     unsafe_allow_html=True,
 )
@@ -35,33 +35,43 @@ def get_zodiac(month, day):
             return sign
     return "未知星座"
 
-# 🧾 表單
+# 🧧 運勢與元素
+fortunes = [
+    "在非洲，每六十秒，就有一分鐘過去。",
+    "凡是每天喝水的人，有高機率在100年內死去。",
+    "只要每天省下買一杯奶茶的錢，十天後就能買十杯奶茶。",
+    "你的笑容將打開一扇門，只是別太快關上它。",
+    "當你的左臉被人打，那你的左臉就會痛。",
+    "成功的男人背後都有一個脊椎。",
+    "如果你瞎了你就會看不見。",
+]
+
+items = ["一坨狗屎", "一顆原子彈", "大拇指指甲", "好市多胡椒鹽", "冰箱裡最後一顆蛋", "一支鐵鎚", "口袋裡的垃圾"]
+
+# 🧾 表單區
 with st.form("fortune_form"):
     name = st.text_input("名字：", "")
-    birthday = st.date_input("生日：", datetime.date.today())
-    submitted = st.form_submit_button("開始")
+    birthday = st.date_input(
+        "生日：",
+        datetime.date(2000, 1, 1),
+        min_value=datetime.date(1900, 1, 1),
+        max_value=datetime.date.today()
+    )
+    submitted = st.form_submit_button("開始 ✨")
 
-# 🎯 當使用者送出後顯示結果
+# 🎯 結果顯示區
 if submitted:
     zodiac = get_zodiac(birthday.month, birthday.day)
-
-    results = [
-        "在非洲，每六十秒，就有一分鐘過去。",
-        "凡是每天喝水的人，有高機率在100年內死去。",
-        "只要每天省下買一杯奶茶的錢，十天後就能買十杯奶茶。",
-        "你的笑容將打開一扇門，只是別太快關上它。",
-        "當你的左臉被人打，那你的左臉就會痛。",
-        "成功的男人背後都有一個脊椎。",
-        "如果你瞎了你就會看不見。",
-    ]
-
-    fortune = random.choice(results)
+    fortune = random.choice(fortunes)
+    item = random.choice(items)
 
     st.markdown(
         f"""
         <div style='background-color:#3b1d5f; border-radius:15px; padding:20px; margin-top:15px;'>
         <h3 style='text-align:center; color:#fcd34d;'>✨ {name}（{zodiac}） ✨</h3>
         <p style='text-align:center; color:#f9fafb; font-size:18px;'>{fortune}</p>
+        <hr style='border:1px solid #a78bfa;'>
+        <p style='text-align:center; color:#c4b5fd;'>🍀 幸運物：<b>{item}</b></p>
         </div>
         """,
         unsafe_allow_html=True,
