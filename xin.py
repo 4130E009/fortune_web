@@ -3,12 +3,12 @@ import random
 import datetime
 
 # 🌐 頁面設定
-st.set_page_config(page_title="每日一句", page_icon="🔮", layout="centered")
+st.set_page_config(page_title="星座評語", page_icon="🔮", layout="centered")
 
 # 🧙‍♀️ 頁首設計
 st.markdown(
     """
-    <h1 style='text-align:center; color:#fcd34d;'>🔮 每日一句 🔮</h1>
+    <h1 style='text-align:center; color:#fcd34d;'>🔮 星座評語 🔮</h1>
     <p style='text-align:center; color:#e9d5ff;'>輸入名字與生日，讓宇宙告訴你今日的命運與靈光。</p>
     """,
     unsafe_allow_html=True,
